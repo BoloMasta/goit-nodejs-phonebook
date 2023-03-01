@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/BoloMasta/goit-nodejs-phonebook#readme",
   "dependencies": {
-    "commander": "^10.0.0",
+    "commander": "^10.0.0"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.20"
   }
 }

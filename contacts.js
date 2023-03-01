@@ -25,6 +25,18 @@ function getContactById(contactId) {
     .catch((err) => console.log(err));
 }
 
+function addContact(name, email, phone) {
+  fs.readFile(contactsPath, "utf-8")
+    .then((data) => {
+      const contacts = JSON.parse(data);
+      const indexOfNewContact = Number(contacts[contacts.length - 1].id) + 1;
+      const newContact = { id: `${indexOfNewContact}`, name, email, phone };
+      fs.writeFile(contactsPath, JSON.stringify([...contacts, newContact]));
+      console.log("Contact was added");
+    })
+    .catch((err) => console.log(err));
+}
+
 function removeContact(contactId) {
   fs.readFile(contactsPath, "utf-8")
     .then((data) => {
@@ -41,21 +53,9 @@ function removeContact(contactId) {
     .catch((err) => console.log(err));
 }
 
-function addContact(name, email, phone) {
-  fs.readFile(contactsPath, "utf-8")
-    .then((data) => {
-      const contacts = JSON.parse(data);
-      const indexOfNewContact = Number(contacts[contacts.length - 1].id) + 1;
-      const newContact = { id: `${indexOfNewContact}`, name, email, phone };
-      fs.writeFile(contactsPath, JSON.stringify([...contacts, newContact]), "utf-8");
-      console.log("Contact was added");
-    })
-    .catch((err) => console.log(err));
-}
-
 module.exports = {
   listContacts,
   getContactById,
-  removeContact,
   addContact,
+  removeContact,
 };
